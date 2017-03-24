@@ -108,3 +108,13 @@ To convert the h5 files to BAM, it uses the [recommended parammeters](https://gi
 Last step (the quiver run itself) has high memory demand. It took ~7 days for a ~450Mbps genome using, at least, 1T of memory.
 
 Snakemake cluster config file is attached.
+
+### Coming soon
+
+ - colormap pre-correction (using illumina reads).
+ - pilon polishing (using illumina reads).
+ - Generate a falcon assembly and merge it with the canu one.
+ - Generate quiver report.
+ 
+
+

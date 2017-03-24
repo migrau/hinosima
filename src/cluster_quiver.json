@@ -1,0 +1,22 @@
+{
+    "__default__" :
+    {
+        "time" : "14-0",
+        "cpus-per-task" : 1,
+        "partition" : "compute",
+        "mem" : "40GB"
+    },
+    "runPBALIGN" :
+    {
+        "cpus-per-task" : 24,
+        "partition" : "compute",
+        "mem" : "40GB"
+    },
+    "runQuiver" :
+    {
+        "time" : "14-0",
+        "cpus-per-task" : 12,
+        "partition" : "bigmem",
+        "mem" : "2T"
+    }
+}
