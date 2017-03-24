@@ -7,7 +7,7 @@ Set of different tools to perfom an assembly using High-Noise Single-Molecule se
 
 ## Contents
 
-* _src/snk_canupipe.py_ . Run correction of pacbio reads and performs assembly.
+* _src/snk_canupipe.py_ . Run correction of pacbio reads and performs a canu assembly.
 * _src/snk.quiver2.3.py_ . Polish canu assembly using Quiver 2.3.
 * _src/snk.quiver3.0.py_ . Polish canu assembly using Quiver 3.0.
 
@@ -25,7 +25,9 @@ _Considerations_
 
 _Usage_
 
-(dry run) $ snakemake -j 60 -np --cluster "sbatch --partition=compute --cpus-per-task=12 --time=14-0 --job-name=snkmk --mem=20GB" -config pfasta=pacbio.fasta -config ifasta=illumina.fastq    
+```{bash}
+(dry run) $ snakemake -j 60 -np --cluster "sbatch --partition=compute --cpus-per-task=12 --time=14-0 --job-name=snkmk --mem=20GB" -config pfasta=pacbio.fasta -config ifasta=illumina.fastq   
+```
 
 _Possible improvements_
 
