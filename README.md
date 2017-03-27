@@ -10,6 +10,7 @@ Set of different tools to perfom an assembly using High-Noise Single-Molecule se
 * _src/snk_canupipe.py_ . Run correction of pacbio reads and performs a canu assembly.
 * _src/snk.quiver2.3.py_ . Polish canu assembly using Quiver 2.3.
 * _src/snk.quiver3.0.py_ . Polish canu assembly using Quiver 3.0.
+* _src/snk.pilon.py_ . Polish canu assembly using Pilon 1.20.
 
 ### snk_canupipe
 
