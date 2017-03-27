@@ -144,7 +144,7 @@ _Usage_
 
 ### Coming soon
 
- - colormap pre-correction (using illumina reads).
+ - ~~~colormap pre-correction (using illumina reads)~~~.
  - ~~pilon polishing (using illumina reads)~~.
  - Generate a falcon assembly and merge it with the canu one.
  - Generate quiver report.
