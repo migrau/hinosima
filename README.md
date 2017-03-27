@@ -14,7 +14,7 @@ Set of different tools to perfom an assembly using High-Noise Single-Molecule se
 
 ### snk_canupipe
 
-First, it uses [colormap](https://github.com/cchauve/CoLoRMap) to run a correction of pacbio reads (long reads) using illumina reads (short reads). Since it takes long time (it runs bwa two times during the process), the script splits the pacbio reads (by default in 999 sub-files), it runs the correction in parallel and finally it merges the results.
+First, it uses [colormap](https://github.com/cchauve/CoLoRMap) or [proovread](https://github.com/BioInf-Wuerzburg/proovread) to run a correction of pacbio reads (long reads) using illumina reads (short reads). Since it takes long time (colormap runs bwa two times during the process, proovread is faster but takes time anyway), the script splits the pacbio reads (by default in 999 sub-files), it runs the correction in parallel and finally it merges the results.
 
 Second, [canu](https://github.com/marbl/canu) performs the assembly.
 
@@ -27,12 +27,17 @@ _Considerations_
 _Usage_
 
 ```{bash}
-(dry run) $ snakemake -j 60 -np --cluster "sbatch --partition=compute --cpus-per-task=12 --time=14-0 --job-name=snkmk --mem=20GB" -config pfasta=pacbio.fasta -config ifasta=illumina.fastq   
+(dry run) $ snakemake -j 60 --snakefile snk_canupipe.py --cluster "sbatch --partition=compute --cpus-per-task=12 --time=14-0 --job-name=snkmk --mem=20GB" --config pfasta=pacbio.fasta ifasta=illumina.fastq fix=colormap -np
+```
+
+To use proovread instead:
+```{bash}
+(dry run) $ snakemake -j 60 --snakefile snk_canupipe.py --cluster "sbatch --partition=compute --cpus-per-task=12 --time=14-0 --job-name=snkmk --mem=20GB" --config pfasta=pacbio.fasta ifasta=illumina.fastq fix=proovread -np
 ```
 
 _Possible improvements_
 
-- Add polishing step, after the canu assembly, using pacbio reads (quiver) or illumina reads (pilon).
+- ~~~Add polishing step, after the canu assembly, using pacbio reads (quiver) or illumina reads (pilon)~~~ done.
 
 ### snk_quiver2.3
 

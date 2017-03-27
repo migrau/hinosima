@@ -2,7 +2,7 @@
 # snk.canupipe.py                                                                                               #
 #                                                                                                               #
 ## Script to correct pacbio (long) reads using illumina (short) reads.                                          #
-# 1. Correct pacbio reads using colormap and illumina reads.                                                    $
+# 1. Correct pacbio reads using colormap (or proovread) and illumina reads.                                     #
 # 2. Assembly pacbio reads using canu                                                                           #
 # (optional, compare assemblies using quast)                                                                    #
 # (optional, compare corrected reads using a reference(blasr, samtools-cigar, count-deletions/insertions)       #
