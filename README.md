@@ -1,5 +1,5 @@
 # hinosima
-High-Noise Single-Molecule sequence Assembly pipe
+High-Noise Single-Molecule sequence Assembly pipeline
 
 ## Description 
 
