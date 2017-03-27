@@ -15,11 +15,10 @@
 #                                                                                                               #
 ## Example run:                                                                                                 #
 # $ module load python/3.5.0                                                                                    #
-# (dry run) $ snakemake -j 60 -np --cluster "sbatch --partition=compute --cpus-per-task=12 --time=14-0          #
-# --job-name=snkmk --mem=20GB" -config pfasta=pacbio.fasta -config ifasta=illumina.fastq                        #
+# (dry run) $  snakemake -j 60 --snakefile snk_canupipe.py --cluster "sbatch --partition=compute                #
+#                              --cpus-per-task=8 --time=14-0 --job-name=snkmk --mem=20GB"                       # 
+#                              --config pfasta=pacbio.fasta ifasta=illumina.fastq fix=colormap -np              #
 #                                                                                                               #
-# -config pfasta=/work/MikheyevU/miquel/destructor/data/reads_of_insert_A01-D01_batch3.fasta                    #
-# -config ifasta=/work/MikheyevU/sasha/varroa/data/raw/vd/vd.assembled.fastq                                    #
 #                                                                                                               #
 #################################################################################################################
 
@@ -36,12 +35,16 @@ PFASTA = config["pfasta"]
 #ILLUMINA fastq file
 IFASTA =  config["ifasta"]
 
+#Correction software
+fixalth = config["fix"]
+
 #split correction step
-numJobs=999
-threadsCorrection=12
+numJobs=101
+threadsCorrection=8
 
 #software location
 colormap="/apps/unit/MikheyevU/miquel/colormap/runCorr.sh"
+proovread="/apps/unit/MikheyevU/miquel/proovread/bin/proovread"
 canu_dir="/apps/unit/MikheyevU/miquel/canu-1.3/Linux-amd64/bin/"
 
 # Regular expression matching the FASTA files.
@@ -85,9 +88,15 @@ rule correction:
         illumina=IFASTA
     output:
         files=prefix+'_corrected/{sample2}_iter2.fasta'
+    params:
+        algorithm=fixalth
     shell:"""
         bn=$(basename {output.files} _iter2.fasta)
-        {colormap} {input.fastas} {input.illumina} {prefix}_corrected/ $bn {threadsCorrection}
+        if [ "{params.algorithm}" == "colormap" ];then
+          {colormap} {input.fastas} {input.illumina} {prefix}_corrected/ $bn {threadsCorrection}
+        else
+          {proovread} -l {input.fastas} -s {input.illumina} --pre {prefix}_corrected/$bn_iter2 -t 24 --coverage=100
+        fi
     """
 
 rule mergeFASTA:
@@ -108,3 +117,5 @@ rule assembly:
    shell:"""
       canu -p {prefix} -d {output.resDir} genomeSize=565m -pacbio-raw {input} useGrid=1 "gridOptions=--partition=compute --mem=80GB --cpus-per-task=24 --time=14-0"
   """
+
+
