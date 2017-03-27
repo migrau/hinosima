@@ -1,10 +1,10 @@
 #########################################################################################################
-# snk.pilon.py                                                                                       	  #
+# snk.pilon.py                                                                                       	#
 #                                                                                                       #
 ## Script to polish a PacBio assembly using PILON and illumina raw reads. 	                            #
-# 1. BWA alignment.                                                            							            #
-# 2. Samtools conversion                                                                      			    #
-# 3. pilon run                                                                          				        #
+# 1. BWA alignment.                                                            							#
+# 2. Samtools conversion                                                                      			#
+# 3. pilon run                                                                          				#
 #                                                                                                       #
 ## Requirements:                                                                                        #
 # - pacbio assembly (from canu, falcon, etc)                                                            #
@@ -12,8 +12,8 @@
 #                                                                                                       #
 ## Example run:                                                                                         #        
 # one node, cpus=24  [1 run with 24threads]                                                             #
-# (dry run) $ snakemake --snakefile snk.pilon.py -j 1 --config rawRead1=reads1.fq rawRead2=reads2.fq 	  # 
-# 																	assembly=assembly.fasta -np			                                    #
+# (dry run) $ snakemake --snakefile snk.pilon.py -j 1 --config rawRead1=reads1.fq rawRead2=reads2.fq 	# 
+# 																	assembly=assembly.fasta -np			#
 #                                                                                                       #
 #########################################################################################################
 
