@@ -77,13 +77,13 @@ Useful links [1](https://github.com/PacificBiosciences/GenomicConsensus/blob/mas
 
 There are important differences using the SMRTANALYSIS V3.0, since quiver started to work with bam files instead h5 format. In this case, the steps are:
 
- - Convert bax.h5 files to bam
- - Run pbalign with each bam file.
- - Merge all the pbalign bam files output in a single bam file ([bamtools](https://github.com/PacificBiosciences/PacBioFileFormats/wiki/BAM-recipes)). 
- - (sort/index bam and index fasta)
- - run Quiver.
+ 1. Convert bax.h5 files to bam
+ 2. Run pbalign with each bam file.
+ 3. Merge all the pbalign bam files output in a single bam file ([bamtools](https://github.com/PacificBiosciences/PacBioFileFormats/wiki/BAM-recipes)). 
+ 4. (sort/index bam and index fasta)
+ 5. run Quiver.
 
-_Installation notes_
+_Run notes_
 
 Download and install [pitchfork](https://github.com/PacificBiosciences/pitchfork/)
 Before run the script, the SMRTANALYSIS installation path variable _SMRTloc_ has to be edited.
@@ -111,10 +111,35 @@ Last step (the quiver run itself) has high memory demand. It took ~7 days for a 
 
 Snakemake cluster config file is attached.
 
+### snk.pilon
+
+To perform a polishing using Illumina reads instead PacBio reads we can use [PILON](https://github.com/broadinstitute/pilon/wiki).
+
+ 1. BWA alignments using the pacbio assembly and the raw illumina reads.
+ 2. Samtools conversion.
+ 3. Pilon.
+ 
+_Requeriments_
+
+ - PacBio assembly (canu, falcon...)
+ - Illumina (paired) raw reads.
+
+_Run notes_
+
+Edit _PILONloc_ with the pilon location.
+Pilon tested using java-jdk/1.8.0_20.
+Run on a node with 24 threads available.
+
+_Usage_
+
+```{bash}
+(dry run) $ snakemake --snakefile snk.pilon.py -j 1 --config rawRead1=reads1.fq rawRead2=reads2.fq assembly=assembly.fasta -np
+```
+
 ### Coming soon
 
  - colormap pre-correction (using illumina reads).
- - pilon polishing (using illumina reads).
+ - ~~pilon polishing (using illumina reads)~~.
  - Generate a falcon assembly and merge it with the canu one.
  - Generate quiver report.
  
